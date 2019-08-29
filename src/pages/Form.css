@@ -1,0 +1,87 @@
+/* Centraliza o formulario */
+.login-form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cria uma borda para o formulario e um background vermelho */
+.form-items {
+    background-color: rgba(238, 154, 133, 0.8);
+    padding: 70px;
+    border-radius: 6px;
+    max-width: 400px;
+    min-width: 400px;
+}
+
+/* ALTERA ALGUNS ATRIBUTOS DO INPUT */
+.form-items input {
+    display: block;
+    border-radius: 2px;
+    border: 1px solid #9EEE85;
+    height: 35px;
+    padding: 2px;
+    font-size: 13px;
+}
+
+.form-items input::placeholder {
+    font-size: 16px;
+    color: rgba(238, 154, 133, 0.8);
+}
+
+
+.form-items label {
+    font-size: 16px;
+    margin: 2px 0px;
+    color: #F61C1C;
+}
+
+/* Mudando propriedades do botao */
+.form-items button {
+    border-radius: 2px;
+    padding: 16px;
+    cursor: pointer;
+    background-color: #9EEE85;
+    color: #F61C1C;
+    float: right;
+}
+
+
+span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #3FAB10;
+    cursor: pointer;
+}
+
+span:hover{
+    text-decoration: underline;
+}
+
+.alert {
+    font-weight: bold;
+}
+
+@media (max-width: 360px) {
+    .form-items {
+        padding: 40px;
+        border-radius: 3px;
+    }
+}
+
+@media(max-width: 270px) {
+    .form-items button {
+        border-radius: 2px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #9EEE85;
+        color: #F61C1C;
+        float: right;
+    }
+      .form-items {
+        padding: 20px;
+        border-radius: 3px;
+    }
+}

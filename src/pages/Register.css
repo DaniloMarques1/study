@@ -1,0 +1,24 @@
+@import url('Form.css');
+.form-items {
+    min-width: 450px;
+}
+
+
+#unmatchpassword[type='password'] {
+    background-color: #F61C1C;
+    border:0;
+}
+
+#unmatchpassword[type='text']:focus {
+    background-color: #F61C1C;
+    border:0;
+    color: white;
+}
+#unmatchpassword::placeholder {
+    color: white;
+}
+
+#unmatchpassword:valid {
+    color: white;
+}
+

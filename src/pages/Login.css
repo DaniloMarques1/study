@@ -1,42 +1,14 @@
-.login-form {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@import url('Form.css');
+
+.alert {
+    background-color: red;
+    color: white;
+    width: 100%;
 }
 
-.form-items {
-    background-color: rgba(238, 154, 133, 0.8);
-    padding: 70px;
-    border-radius: 6px;
+.form-items button:hover{
+    color: white;
+    background-color: #3FAB10;
+    transition: 0.4s;
 }
 
-.form-items div {
-    margin-bottom: 20px;
-    margin-top: 2px;
-}
-
-.form-items label {
-    font-size: 16px;
-    margin: 2px 0px;
-}
-
-.form-items input {
-    display: block;
-    border-radius: 2px;
-    border: 1px solid #9EEE85;
-    height: 32px;
-    padding: 2px;
-    font-size: 13px;
-}
-
-.form-items button {
-    border: 0;
-    border-radius: 2px;
-    padding: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: #9EEE85;
-    color: #F61C1C;
-}
