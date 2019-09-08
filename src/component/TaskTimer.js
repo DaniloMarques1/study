@@ -16,7 +16,7 @@ const DEFAULT_BREAK = {minute: 5, second: 0}
 const audio = new Audio('https://danilomarques1.github.io/time2study/audio/clock.mp3')
 
 function Timer({ loadTasks, currentTask }) {
-    
+
     const [timer, setTimer] = useState(DEFAULT_TIMER)
     const [breakTime, setBreakTime] = useState(false)
     const [buttonName, setButtonName] = useState("Start")
@@ -42,7 +42,7 @@ function Timer({ loadTasks, currentTask }) {
                 });
                 setTask(update.data)
                 loadTasks()
-                
+
             }
             if (task.active === true ) {
                 taskUpdate()
@@ -51,23 +51,23 @@ function Timer({ loadTasks, currentTask }) {
 
 
     }, [finished])
-    
+
     //só executa o setinterval caso o trigger == true
     useEffect(() => {
         //caso o botao (start) ainda nao tenha sido clicado
         if (trigger) {
             setButtonName(PAUSE_ICON)
-            //caso nao chegue em 0 minutos e 0 segundos parar 
+            //caso nao chegue em 0 minutos e 0 segundos parar
             if (!(timer.second === 0 && timer.minute === 0)) {
 
                 const intervalId = setInterval(() => {
                     setTimer(prevState => ({ minute: prevState.second === 0 ? prevState.minute - 1 : prevState.minute, second: prevState.second > 0 ? prevState.second - 1 : 59 }))
-                }, 100)
+                }, 1000)
                 return () => clearInterval(intervalId)
             } else {
                 // audio temporario
                 audio.play()
-                
+
                 //finalizei uma atividade/reseta o trigger e "inicia" o breaktime
                 setFinished(finished => !finished)
                 setTrigger(false)
@@ -77,18 +77,18 @@ function Timer({ loadTasks, currentTask }) {
                         //fecha o modal caso a atividade "atual" ja tenha sido finalizada
                         $('#taskTimer').modal('hide')
                     }
-                   
+
                 } else {
                     setTimer(DEFAULT_BREAK)
                 }
                 setBreakTime(breakTime => !breakTime)
             }
-           
+
         } else {
             setButtonName(PLAY_ICON)
-            
+
         }
-        
+
     }, [trigger, timer, breakTime]);
 
     /**
@@ -100,7 +100,7 @@ function Timer({ loadTasks, currentTask }) {
             setTimer(DEFAULT_BREAK)
         } else {
             setTimer(DEFAULT_TIMER)
-        } 
+        }
     }
 
     //muda o valor do trigger (pausa/play)
