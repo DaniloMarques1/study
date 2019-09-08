@@ -10,8 +10,8 @@ import './TaskTimer.css'
 
 import api from '../services/api'
 
-const DEFAULT_TIMER = {minute: 2, second: 0}
-const DEFAULT_BREAK = {minute: 1, second: 0}
+const DEFAULT_TIMER = {minute: 25, second: 0}
+const DEFAULT_BREAK = {minute: 5, second: 0}
 
 
 function Timer({ loadTasks, currentTask }) {
