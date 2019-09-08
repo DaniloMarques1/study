@@ -63,7 +63,7 @@ function Timer({ loadTasks, currentTask }) {
 
                 const intervalId = setInterval(() => {
                     setTimer(prevState => ({ minute: prevState.second === 0 ? prevState.minute - 1 : prevState.minute, second: prevState.second > 0 ? prevState.second - 1 : 59 }))
-                }, 100)
+                }, 1000)
                 return () => clearInterval(intervalId)
             } else {
                 // audio temporario
