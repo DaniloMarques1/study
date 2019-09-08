@@ -12,7 +12,7 @@ import api from '../services/api'
 
 const DEFAULT_TIMER = {minute: 25, second: 0}
 const DEFAULT_BREAK = {minute: 5, second: 0}
-
+const audio = new Audio('https://danilomarques1.github.io/time2study/audio/clock.mp3')
 
 function Timer({ loadTasks, currentTask }) {
     
@@ -40,9 +40,7 @@ function Timer({ loadTasks, currentTask }) {
                     }
                 });
                 setTask(update.data)
-                if (update.data.active === false) {
-                    loadTasks()
-                }
+                loadTasks()
                 
             }
             if (task.active === true ) {
@@ -51,7 +49,7 @@ function Timer({ loadTasks, currentTask }) {
         }
 
 
-    }, [finished, task.active, loadTasks, task.id_task])
+    }, [finished])
     
     //só executa o setinterval caso o trigger == true
     useEffect(() => {
@@ -63,18 +61,17 @@ function Timer({ loadTasks, currentTask }) {
 
                 const intervalId = setInterval(() => {
                     setTimer(prevState => ({ minute: prevState.second === 0 ? prevState.minute - 1 : prevState.minute, second: prevState.second > 0 ? prevState.second - 1 : 59 }))
-                }, 1000)
+                }, 100)
                 return () => clearInterval(intervalId)
             } else {
                 // audio temporario
-                const audio = new Audio('https://danilomarques1.github.io/time2study/audio/clock.mp3')
                 audio.play()
+                
                 //finalizei uma atividade/reseta o trigger e "inicia" o breaktime
                 setFinished(finished => !finished)
                 setTrigger(false)
                 if (breakTime) {
                     setTimer(DEFAULT_TIMER)
-                    console.log(task)
                     if (task.active === false) {
                         //fecha o modal caso a atividade "atual" ja tenha sido finalizada
                         $('#taskTimer').modal('hide')
@@ -91,7 +88,7 @@ function Timer({ loadTasks, currentTask }) {
             
         }
         
-    }, [trigger, timer, breakTime, task]);
+    }, [trigger, timer, breakTime]);
 
     /**
     * reseta o temporizador, caso esteja no break time resetara para 5 minutos, caso contrario resetará para 25 minutos
