@@ -1,0 +1,138 @@
+import React, { useState, useEffect } from 'react'
+
+import $ from 'jquery'
+
+import PLAY_ICON from '../assets/play.png';
+import PAUSE_ICON from '../assets/pause.png';
+import RESET_ICON from '../assets/reset.png';
+
+import './TaskTimer.css'
+
+import api from '../services/api'
+
+const DEFAULT_TIMER = {minute: 2, second: 0}
+const DEFAULT_BREAK = {minute: 1, second: 0}
+
+
+function Timer({ loadTasks, currentTask }) {
+    
+    const [timer, setTimer] = useState(DEFAULT_TIMER)
+    const [breakTime, setBreakTime] = useState(false)
+    const [buttonName, setButtonName] = useState("Start")
+    const [task, setTask] = useState(currentTask)
+    const [finished, setFinished] = useState(false)
+    const [trigger, setTrigger] = useState(false)
+
+    //carrega a props no estado (task)
+    useEffect(() => {
+        setTask(currentTask)
+    }, [currentTask]);
+
+
+    // verifica se a task foi finalizada e se nao esta ativa, envia uma requisição para fazer o update da task
+    useEffect(() => {
+        if (finished) {
+
+            async function taskUpdate() {
+                const update = await api.get(`/updateTask/${task.id_task}`, {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                });
+                setTask(update.data)
+                if (update.data.active === false) {
+                    loadTasks()
+                }
+                
+            }
+            if (task.active === true ) {
+                taskUpdate()
+            }
+        }
+
+
+    }, [finished, task.active, loadTasks, task.id_task])
+    
+    //só executa o setinterval caso o trigger == true
+    useEffect(() => {
+        //caso o botao (start) ainda nao tenha sido clicado
+        if (trigger) {
+            setButtonName(PAUSE_ICON)
+            //caso nao chegue em 0 minutos e 0 segundos parar 
+            if (!(timer.second === 0 && timer.minute === 0)) {
+
+                const intervalId = setInterval(() => {
+                    setTimer(prevState => ({ minute: prevState.second === 0 ? prevState.minute - 1 : prevState.minute, second: prevState.second > 0 ? prevState.second - 1 : 59 }))
+                }, 100)
+                return () => clearInterval(intervalId)
+            } else {
+                // audio temporario
+                const audio = new Audio('https://danilomarques1.github.io/time2study/audio/clock.mp3')
+                audio.play()
+                //finalizei uma atividade/reseta o trigger e "inicia" o breaktime
+                setFinished(finished => !finished)
+                setTrigger(false)
+                if (breakTime) {
+                    setTimer(DEFAULT_TIMER)
+                    console.log(task)
+                    if (task.active === false) {
+                        //fecha o modal caso a atividade "atual" ja tenha sido finalizada
+                        $('#taskTimer').modal('hide')
+                    }
+                   
+                } else {
+                    setTimer(DEFAULT_BREAK)
+                }
+                setBreakTime(breakTime => !breakTime)
+            }
+           
+        } else {
+            setButtonName(PLAY_ICON)
+            
+        }
+        
+    }, [trigger, timer, breakTime, task]);
+
+    /**
+    * reseta o temporizador, caso esteja no break time resetara para 5 minutos, caso contrario resetará para 25 minutos
+    *
+    */
+    const resetTimer = () => {
+        if (breakTime) {
+            setTimer(DEFAULT_BREAK)
+        } else {
+            setTimer(DEFAULT_TIMER)
+        } 
+    }
+
+    //muda o valor do trigger (pausa/play)
+    const startTimer = () => {
+        setTrigger(trigger => !trigger)
+    }
+
+    return (
+        <div className="modal fade" id="taskTimer" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                    <div className='task-title'>
+                        <button onClick={resetTimer} type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 className='text-center'>{task.title}</h5>
+                    </div>
+                    <div className="modal-body">
+                        <h1 className='text-center'>{String(timer.minute).padStart(2, '0')}:{String(timer.second).padStart(2, '0')}</h1>
+                        <h3 className='text-center'>{task.current_pomodoros}/{task.pomodoros_total}</h3>
+                        {task.description === undefined ? "" : (<p>{task.description}</p>) }
+                        <div className='buttons'>
+                            <button onClick={startTimer}><img className='buttonName' src={buttonName} alt='play/pause button' /> </button>
+                            <button onClick={resetTimer}><img className='buttonName' src={RESET_ICON} alt="reset button"/></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Timer

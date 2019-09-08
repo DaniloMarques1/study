@@ -1,0 +1,33 @@
+img {
+    width: 30px;
+    height: 30px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.navbar-color {
+    background-color: rgba(238, 154, 133, 0.8);
+}
+
+.navbar .collapse > ul {
+    margin-right: 80px;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: white;
+}
+
+.navbar .collapse > ul > .nav-item:hover {
+    background-color: #9EEE85;
+    transition: all 0.3s;
+}

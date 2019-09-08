@@ -1,8 +1,4 @@
 @import url('Form.css');
-.form-items {
-    min-width: 450px;
-}
-
 
 #unmatchpassword[type='password'] {
     background-color: #F61C1C;

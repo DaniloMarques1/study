@@ -1,0 +1,42 @@
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.modal-body > h1  h3  p h5 {
+    color: #296A0E;
+}
+
+.task-title {
+    border-bottom: 1px solid #C6F1B3;
+    padding: 6px;
+  
+}
+
+.task-title h5{
+  margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-body > .buttons > button {
+    padding: 0 30px;
+    margin: 10px;
+    border: none;
+    border: 1px solid #9EEE85;
+    background-color: #FFF;
+}
+
+.modal-body > .buttons > button:hover {
+    background-color: #C6F1B3;
+    transition: all .4s;
+}
+
+.buttonName{
+    width: 14px;
+    height: 14px;
+}

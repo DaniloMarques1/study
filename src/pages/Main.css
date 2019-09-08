@@ -1,0 +1,76 @@
+.containerTasks {
+    display: flex;
+}
+
+.tasks {
+    margin: 30px;
+    min-height: 300px;
+    width: 200px;
+    padding: 10px;
+    background-color: rgba(238, 154, 133, 0.8); 
+}
+
+
+.add-task {
+    margin: 70px 30px 30px 30px; 
+    height: 70px; 
+    box-sizing: border-box;  
+}
+
+.containerTasks > .tasks > ul > li{
+    list-style-type: none;
+    border-bottom: 2px solid #FFF;
+    margin: 4px;
+    padding: 4px;
+    color: #296A0E;
+}
+
+.btn-add-task {
+    background: rgba(238, 154, 133, 0.8);
+    padding: 10px 15px;
+    color: #329707;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.btn-add-task:hover {
+    font-size: 20px;
+}
+
+
+.btn-start {
+    background-color: #fff;
+    border: none;
+    padding: 3px;
+    font-size: 13px;
+    color: #dc7e65;
+    float: right;
+    border-radius: 3px;
+}
+
+.btn-start:hover {
+    background-color: #9EEE85;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+@media (max-width: 420px) {
+    .containerTasks {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:    '. add-task .'
+                                '. tasks .';
+       
+    }
+
+    .tasks {
+        grid-area: tasks;
+        margin: 0 0 0 10px;
+    }
+    .add-task {
+        margin: 30px 0 0 10px;
+        grid-area: add-task;
+        text-align: center;
+    }
+}

@@ -1,24 +1,21 @@
 /* Centraliza o formulario */
-.login-form {
+.containerDiv {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 /* Cria uma borda para o formulario e um background vermelho */
 .form-items {
     background-color: rgba(238, 154, 133, 0.8);
-    padding: 70px;
-    border-radius: 6px;
-    max-width: 400px;
-    min-width: 400px;
+    border-radius: 10px;
+    padding: 100px;
+    min-width: 500px;
 }
 
 /* ALTERA ALGUNS ATRIBUTOS DO INPUT */
 .form-items input {
-    display: block;
     border-radius: 2px;
     border: 1px solid #9EEE85;
     height: 35px;
@@ -49,14 +46,14 @@
 }
 
 
-span {
+.form {
     font-size: 12px;
     font-weight: bold;
     color: #3FAB10;
     cursor: pointer;
 }
 
-span:hover{
+.form:hover{
     text-decoration: underline;
 }
 
@@ -64,14 +61,14 @@ span:hover{
     font-weight: bold;
 }
 
-@media (max-width: 360px) {
+@media(max-width: 550px) {
     .form-items {
-        padding: 40px;
-        border-radius: 3px;
+        min-width: 400px;
+        padding: 70px;
     }
 }
 
-@media(max-width: 270px) {
+@media(max-width: 380px) {
     .form-items button {
         border-radius: 2px;
         padding: 10px;
@@ -81,7 +78,8 @@ span:hover{
         float: right;
     }
       .form-items {
-        padding: 20px;
+        padding: 40px;
         border-radius: 3px;
+        min-width: 300px;
     }
 }

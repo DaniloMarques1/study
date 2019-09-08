@@ -1,0 +1,52 @@
+.historyContainer > h2 {
+    color: #296A0E;
+    font-size: 26px;
+    margin-top: 13px;
+    font-weight: bold;
+}
+
+.tasks-history {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 14px;
+    margin: 30px 10px;
+}
+
+.task-history {
+    height: 100%;
+    border: 1px solid rgba(238, 154, 133, 0.8);
+    padding: 14px;
+    color: #296A0E;
+}
+
+
+@media (max-width: 900px) {
+    .tasks-history {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .tasks-history {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 440px) {
+    .tasks-history {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .historyContainer > h2 {
+        color: #296A0E;
+        font-size: 19px;
+        margin-top: 13px;
+        font-weight: bold;
+    }
+}
+
+
+
