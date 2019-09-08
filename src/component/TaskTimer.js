@@ -5,13 +5,14 @@ import $ from 'jquery'
 import PLAY_ICON from '../assets/play.png';
 import PAUSE_ICON from '../assets/pause.png';
 import RESET_ICON from '../assets/reset.png';
+import DELETE_ICON from '../assets/delete.png';
 
 import './TaskTimer.css'
 
 import api from '../services/api'
 
-const DEFAULT_TIMER = {minute: 25, second: 0}
-const DEFAULT_BREAK = {minute: 5, second: 0}
+const DEFAULT_TIMER = {minute: 2, second: 0}
+const DEFAULT_BREAK = {minute: 1, second: 0}
 const audio = new Audio('https://danilomarques1.github.io/time2study/audio/clock.mp3')
 
 function Timer({ loadTasks, currentTask }) {
@@ -107,6 +108,23 @@ function Timer({ loadTasks, currentTask }) {
         setTrigger(trigger => !trigger)
     }
 
+    const deleteTask = async () => {
+        if (window.confirm("Are you sure you want to delete the task? ")) {
+            $("#taskTimer").modal('hide')
+            try {
+                await api.delete(`/deleteTask/${task.id_task}`, {
+                    headers : {
+                        Authorization: localStorage.getItem('token')
+                    }
+                })
+                loadTasks()
+            }
+            catch(e) {
+                console.log(e)
+            }
+        }
+    }
+
     return (
         <div className="modal fade" id="taskTimer" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -124,6 +142,7 @@ function Timer({ loadTasks, currentTask }) {
                         <div className='buttons'>
                             <button onClick={startTimer}><img className='buttonName' src={buttonName} alt='play/pause button' /> </button>
                             <button onClick={resetTimer}><img className='buttonName' src={RESET_ICON} alt="reset button"/></button>
+                            <button onClick={deleteTask}><img className='deleteButton' src={DELETE_ICON} alt="delete button" /></button>
                         </div>
                     </div>
                 </div>

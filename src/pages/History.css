@@ -20,6 +20,12 @@
     color: #296A0E;
 }
 
+.historyContainer  .deleteButton {
+    width: 32px;
+    height: 32px;
+    background-color: #FFF;
+    cursor: pointer;
+}
 
 @media (max-width: 900px) {
     .tasks-history {
