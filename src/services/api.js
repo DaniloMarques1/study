@@ -4,7 +4,7 @@ import axios from 'axios'
 //https://danilomarques.pythonanywhere.com
 
 const api = axios.create({
-    baseURL: ' http://localhost:5000'
+    baseURL: 'https://danilomarques.pythonanywhere.com'
 });
 
 export default api;
