@@ -9,7 +9,7 @@ import Main from './pages/Main'
 
 export default function Routes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
             <Route path='/history' exact component={History} />
