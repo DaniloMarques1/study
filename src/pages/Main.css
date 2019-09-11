@@ -13,8 +13,7 @@
 
 .add-task {
     margin: 70px 30px 30px 30px; 
-    height: 70px; 
-    box-sizing: border-box;  
+    height: 70px;
 }
 
 .containerTasks > .tasks > ul > li{

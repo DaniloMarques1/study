@@ -21,13 +21,12 @@ function Register({history}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        setLoader(true)
         if (password !== confirmPassword) {
             setInputClass('unmatchpassword');
             setAlert('Passwords do not match')
             return;
         }
-
+        setLoader(true)
         setInputClass('')
 
         try{
