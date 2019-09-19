@@ -7,6 +7,7 @@ import Loader from '../component/Loader'
 import api from '../services/api';
 
 import DELETE_ICON from '../assets/delete.png'
+import RESET_ICON from '../assets/reset.png'
 
 export default function History({ history} ) {
     const [tasks, setTasks] = useState([]);
@@ -49,6 +50,11 @@ export default function History({ history} ) {
         } 
     }
 
+    const handleRestore = (task_id) => {
+        //TODO Fazer a requisição para realizar o restore da task
+        console.log(task_id)
+    }
+
     return (
        <div className='historyContainer'>
             <Navbar history={history} />
@@ -61,6 +67,7 @@ export default function History({ history} ) {
                         <h3>{task.title}</h3>
                         <span>{task.description}</span>
                         <h5>Pomdoros realizados: {task.pomodoros_total}</h5>
+                        <img onClick={() => handleRestore(task.id_task)} className='restore-icon' src={RESET_ICON} alt='restore task' />
                     </div>
                 ))}
                 

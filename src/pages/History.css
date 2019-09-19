@@ -27,6 +27,12 @@
     cursor: pointer;
 }
 
+.restore-icon {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
 @media (max-width: 900px) {
     .tasks-history {
         display: grid;
